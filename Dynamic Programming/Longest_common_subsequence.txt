@@ -61,6 +61,7 @@ public class MyClass{
             System.out.print(c[z]);
         }
         
+	// return longest sunsequence length
         return table[m][n];
         
         
@@ -73,7 +74,7 @@ public class MyClass{
 	    
 	    Scanner sc=new Scanner(System.in);
 	    int tc=sc.nextInt();
-	    // while loop for finding longest subsequence for 'n' no of testcases. 
+	    // while loop for finding longest subsequence for 'tc(user input)' no of testcases. 
 	    while(tc>0)
 	    {
 	        int n=sc.nextInt();
