@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+struct node* getNewNode(int d)
+{
+    struct node* t;
+    t=(struct node*)malloc(sizeof(struct node));
+    t->data=d;
+    t->left=NULL;
+    t->right=NULL;
+    
+    return t;
+}
+struct node* Insert(struct node* root,int d)
+{
+    struct node* t;
+    if(root==NULL)
+    {
+        t=getNewNode(d);
+        //printf("%d\n",t->data);
+       root=t;
+    }
+    else if(d < root->data)
+    {
+        root->left=Insert(root->left,d);
+    }
+    else
+    {
+        root->right=Insert(root->right,d);
+    }
+    return root;
+}
+
+void In_Order_Traverse(struct node* root)
+{
+    if (root == NULL) 
+        return; 
+ 
+     In_Order_Traverse(root->left); 
+     
+     printf("%d\n",root->data);
+  
+     In_Order_Traverse(root->right); 
+  
+    
+      
+    
+}
+int main()
+{
+    struct node* root=NULL;
+    root= Insert(root,10);
+   root= Insert(root,2);
+   root= Insert(root,15);
+   root=Insert(root,12);
+   root=Insert(root,5);
+    In_Order_Traverse(root);
+    return 0;
+}

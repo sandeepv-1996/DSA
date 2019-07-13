@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+  int data;
+  struct node* left;
+  struct node* right;
+  
+};
+int length;
+struct node* head=NULL;
+void push(int new_data)
+{
+    struct node* temp,*p;
+    temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=new_data;
+    temp->left=NULL;
+    temp->right=NULL;
+    if(head==NULL)
+    {
+        head=temp;
+    }
+    else
+    {
+        p=head;
+        while(p->right!=NULL)
+        {
+            p=p->right;
+        }
+        p->right=temp;
+        temp->left=p;
+        
+    }
+}
+void display(){
+    int count=0;
+    struct node*p;
+    p=head;
+    while(p!=NULL)
+    {   printf("%d\n",p->data);
+        p=p->right;
+        count++;
+    }
+    length=count;
+    printf("length of doubly linked list is :%d\n",length);
+    
+}
+int main() {
+   push(1);
+   push(2);
+   push(3);
+   push(4);
+   display();
+   push(10);
+   display();
+   
+}

@@ -1,0 +1,57 @@
+// Stack using array
+#include<stdio.h>
+#include<stdlib.h>
+#define size 5
+int top=-1;
+int stack[size];
+
+void push(int ele){
+    if(top == size-1)
+    {
+        printf("stack is overflow\n");
+    }
+    else
+    {
+    top++;
+    stack[top]=ele;
+    printf("%d is pushed in stack\n",stack[top]);
+}
+}
+void pop()
+{
+    if(top==-1)
+    {
+        printf("stack is underflow\n");
+        
+    }
+    else
+    {
+        int ele=stack[top--];
+        printf("%d is popped from stack\n",ele);
+    }
+}
+void display()
+{
+    for (int i=0;i<top;i++)
+    {
+        printf("%d\n",stack[i]);
+    }
+}
+int peek()
+{
+    return stack[top];
+}
+int main() {
+
+push(10);
+push(20);
+push(30);
+push(40);
+push(50);
+display();
+pop();
+pop();
+display();
+printf("Peek element in stack is : %d\n",peek());
+ 
+}

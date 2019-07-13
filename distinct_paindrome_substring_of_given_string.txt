@@ -1,0 +1,83 @@
+import java.util.*;
+
+
+
+public class MyClass {
+    
+    
+    public boolean isPalindrome(String str,int i,int j)
+    {
+        int p=0;
+        String str1=str.substring(i,j);
+    
+        String str2="";
+
+        char[] c1=str1.toCharArray();
+        int len=c1.length;
+        char[] c2=new char[len];
+        for(int k=len-1;k>=0;k--)
+        {
+            c2[p]=c1[k];
+            p++;
+        }
+        
+        String s1=new String(c1);
+        String s2=new String(c2);
+        if(s1.equalsIgnoreCase(s2))
+        {
+           return true; 
+        }
+        return false;
+        
+    }
+    public static void main(String args[]) {
+        MyClass my=new MyClass();
+      String str="aabaa";
+      int n=str.length();
+      //int z=1;
+      String mm="NULL";
+      String[] s1=new String[4000];
+for(int i=0;i<4000;i++)
+{
+    s1[i]=" ";
+}
+int index;
+int oo=0,flag=0;
+
+boolean found=false;
+      for(int i=0;i<n;i++)
+      {
+          for(int j=i+1;j<=n;j++)
+          {
+              
+              
+              if(my.isPalindrome(str,i,j))
+              {
+                 String s2=str.substring(i,j);
+              for(int k=0;k<s1.length;k++){
+                  if(s1[k].equals(s2)){
+                      flag=1;
+                  }
+              }
+              if(flag==0){
+                      s1[oo]=s2;
+                      System.out.println(s1[oo]);
+                      oo++;
+                      
+              }
+              flag=0;
+               
+              }
+              
+                  
+              
+          }
+          
+              
+                    
+      
+      
+      
+      }
+    }
+}

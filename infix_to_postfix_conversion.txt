@@ -1,0 +1,153 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+
+
+struct stack
+{
+  int *a;
+  int top;
+  int cp;
+};
+
+struct stack*  init1(int size)
+{
+    struct stack* st=(struct stack*)malloc(sizeof(struct stack));
+    st->cp=size;
+    st->a=(int *)malloc(size*sizeof(int));
+    st->top=-1;
+    return st;
+}
+
+void push(struct stack* p,int ele)
+{
+    if(p->top==p->cp)
+    {
+        printf("NO memory to store");
+    }
+    else
+    {
+        p->top++;
+    p->a[p->top]=ele;
+}
+}
+char pop(struct stack* p)
+{int del=0;
+    if(p->top==-1)
+    {
+        return ' ';
+        printf("Stack is empty");
+    }
+    else
+    {
+     del=p->a[p->top];
+    p->top--;
+   // printf("Popped element is %d\n",del);
+    return del;
+    
+    }
+}
+void display(struct stack* p)
+{
+    for(int i=p->top;i>=0;i--)
+    {
+        printf("%d\n",p->a[i]);
+    }
+}
+char peek(struct stack *p)
+{
+    return p->a[p->top];
+}
+int Operand(char ch)
+{
+    return (ch>='a' && ch<='z' || ch>='A' && ch<='Z');
+}
+int isEmpty(struct stack* p) 
+{ 
+    
+    return p->top == -1 ; 
+} 
+int Precedence(char ch)
+{
+    switch(ch){
+    case '+':
+    case '-':
+    return 1;
+    
+    case '*':
+    case '/':
+    return 2;
+    case '^':
+    return 3;
+    }
+    return -1;
+    
+
+}
+int infixToPostfix(char *exp)
+{
+    int i,k;
+    struct stack* p=init1(21);
+    for(i=0,k=-1;exp[i];i++)
+    {
+        if(Operand(exp[i]))
+        {
+            exp[++k]=exp[i];
+        }
+        
+        else if(exp[i]=='(')
+        {
+            push(p,exp[i]);
+        }
+        else if(exp[i]==')')
+        {
+            
+            
+                while(!isEmpty(p) && peek(p)!='(')
+                {
+                    
+                    exp[++k]=pop(p);
+                    
+                }
+                if(peek(p)!='(')
+                {
+                    return -1;
+                }
+                else
+                {
+                    pop(p);
+                }
+                
+               
+            
+            
+        }
+        else
+        {
+            while(Precedence(exp[i])<Precedence(peek(p)))
+            {
+                exp[++k]=pop(p);
+                
+            }
+            push(p,exp[i]);
+        }
+    }
+    
+    while(!isEmpty(p))
+    {
+        exp[++k]=pop(p);
+    }
+    exp[++k]='\0';
+    
+    printf("%s",exp);
+}
+
+int main() {
+   
+    char exp[] = "a+b*(c^d-e)^(f+g*h)-i"; 
+    
+    infixToPostfix(exp); 
+     
+  
+    return 0; 
+}

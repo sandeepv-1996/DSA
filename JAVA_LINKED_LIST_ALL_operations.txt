@@ -1,0 +1,129 @@
+import java.util.*;
+class Node
+{ 
+    int data;
+    Node next;
+    
+    Node(int d)
+    {
+        data=d;
+        next=null;
+    }
+}
+
+
+
+public class MyClass {
+    
+    public static Node push(Node head,int d)
+    {
+        Node n=new Node(d);
+        
+        if(head==null)
+        {
+            head=n;
+            return head;
+        }
+        else
+        {
+            Node temp=head;
+            while(temp.next!=null)
+            {
+                temp=temp.next;
+            }
+            temp.next=n;
+            return head;
+        }
+    }
+    public static void display(Node head)
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            
+            System.out.print(temp.data + "->");
+            temp=temp.next;
+        }
+        System.out.println("NULL");
+    }
+    public static int length(Node head)
+    {  int count=0;
+        Node temp=head;
+        while(temp!=null)
+        {
+            count+=1;
+           
+            temp=temp.next;
+        }
+        
+        return count;
+    }
+    
+    public static Node reverse(Node head)
+    {
+        Node prev=null;
+        Node curr=head;
+        Node link=null;
+        while(curr!=null)
+        {
+            link=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=link;
+            
+        }
+        head=prev;
+        
+        return head;
+        
+        
+    }
+    public static Node node_swap(Node head,int pos)
+    {
+        Node temp=head;
+        int i=1;
+        int len=length(head);
+        if(pos>len)
+        {
+            System.out.println("Invalid Position");
+        }
+        else
+        {   
+            while(i<(pos-1))
+            {
+                temp=temp.next;
+                i++;
+                
+            }
+            Node temp1=temp.next;
+            Node temp2=temp1.next;
+            
+            temp1.next=temp2.next;
+            temp2.next=temp1;
+            temp.next=temp2;
+        }
+        
+        return head;
+        
+    }
+    
+    public static void main(String args[]) {
+        
+        Node head=null;
+        
+        Node list=push(head,1);
+        list=push(list,2);
+        list=push(list,3);
+        list=push(list,4);
+        list=push(list,5);
+        display(list);
+        int length=length(list);
+        System.out.println(length);
+        list=reverse(list);
+        display(list);
+           list=reverse(list);
+        list=node_swap(list,3);
+        display(list);
+      
+    }
+}
